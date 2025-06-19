@@ -1,0 +1,17 @@
+<div class="container">
+    <header class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills">
+            {% if user.is_authenticated %}
+                <li class="nav-item"><a href="{% url "catalogue_list" %}" class="nav-link">Catalogue</a></li>
+                <li class="nav-item"><a href="{% url "api_page" %}" class="nav-link">API</a></li>
+                <li class="nav-item"><a href="{% url "basket_page" %}" class="nav-link">Basket</a></li>
+                <li class="nav-item"><a href="{% url "orders_page" %}" class="nav-link">Orders</a></li>
+                <li class="nav-item"><a href="{% url "profile_page" %}" class="nav-link">Profile</a></li>
+                <li class="nav-item"><a href="{% url "logout_page" %}" class="nav-link">Logout</a></li>
+            {% else %}
+                <li class="nav-item"><a href="{% url "register_page" %}" class="nav-link">Register</a></li>
+                <li class="nav-item"><a href="{% url "login_page" %}" class="nav-link">Login</a></li>
+            {% endif %}
+        </ul>
+    </header>
+</div>

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+    <h1>Welcome, {{ user.username|default:'Guest' }}</h1>
+
+    <p>We are glad to see you in our site</p>
+    <div class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills">      
+            {% if user.is_authenticated %}
+                <li class="nav-item"><a href={% url "logout_page" %} class="nav-link">Logout</a></li>
+            {% else %}
+                <li class="nav-item"><a href="{% url "register_page" %}" class="nav-link">Sign up</a></li>
+                <li class="nav-item"><a href="{% url "login_page" %}" class="nav-link">Sign in</a></li>
+            {% endif %}
+        </ul>
+    </div>
+{% endblock %}
+
+
+{% block catalogue_nav %}{% endblock %}
+{% block categories_nav %}{% endblock %}
+{% block tags_nav %}{% endblock %}
+{% if user.is_authenticated %}
+    {% block nav %}{% endblock  %}
+{% endif %}

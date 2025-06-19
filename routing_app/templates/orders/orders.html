@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Orders{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+        {% for item in list_items %}
+            <div class="card col-md-4">
+                <div class="container">
+                    <h4><b>Item {{item.id}}</b></h4>
+                    <p>Client: {{item.client}}</p>
+                    <p>Date created: {{item.dateCreated}}</p>
+                    <p>Delivery address: <b>{{item.deliveryAddress}}</b></p>
+                    <div class="row">
+                        <a href="{% url "order_details" item.pk %}" class="btn btn-secondary col-md-4">Details</a>
+                        <a href="" class="btn btn-primary col-md-4">Edit</a>
+                        <a href="{% url "order_delete" item.pk %}" class="btn btn-danger col-md-4">Delete</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+{% block nav %}{% endblock %}
+{% block categories_nav %}{% endblock %}
+{% block tags_nav %}{% endblock %}

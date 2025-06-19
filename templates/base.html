@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block title %} Title {% endblock %}</title>
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+    </head>
+    <body>
+        {% include "inc/_header.html" %}
+
+        {% block nav %}
+            <nav>{% include "inc/_nav.html" %}</nav>
+        {% endblock %}
+        {% block catalogue_nav %}
+            <nav>{% include "inc/_catalogueNav.html" %}</nav>
+        {% endblock %}
+        {% block categories_nav %}
+            <nav>{% include "inc/_categoriesNav.html" %}</nav>
+        {% endblock %}
+        {% block tags_nav %}
+            <nav>{% include "inc/_tagsNav.html" %}</nav>
+        {% endblock %}
+
+        {% block body %}
+        <h1>Sme content</h1>
+        {% endblock body %}
+
+        {% include "inc/_footer.html" %}
+    </body>
+</html>

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Order details{% endblock %}
+{% block body %}
+      <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-10 col-xl-8">
+        <div class="card" style="border-radius: 10px;">
+          <div class="card-header px-4 py-5">
+            <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #a8729a;">{{user.last_name}} {{user.first_name}}</span>!</h5>
+          </div>
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <p class="lead fw-normal mb-0" style="color: #a8729a;">Receipt</p>
+              <p class="small text-muted mb-0">Receipt Voucher : {{order.id}}</p>
+            </div>
+            {% if perms.routing_app.view_ordergoods %}
+              {% for orderGood in order_goods %}
+              <div class="card shadow-0 border mb-4">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <img src="{{orderGood.good.image.url}}" alt="{{orderGood.good.name}}" class="img-fluid rounded mx-auto d-block">
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0">{{orderGood.good.name}}</p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small">{{orderGood.good.category}}</p>
+                    </div>
+                    <div class="col-md-4">
+                        {% for tag in orderGood.good.tags.all %}
+                        <div class="row-md-2 text-center d-flex justify-content-center align-items-center">
+                            <p class="text-muted mb-0 small">{{tag}}</p>
+                          </div>
+                          {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            {% endif %}
+
+            <div class="d-flex justify-content-between pt-2">
+              <p class="fw-bold mb-0">Order Details</p>
+              <p class="text-muted mb-0"><span class="fw-bold me-4">Total</span> {{total_sum}}</p>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <p class="text-muted mb-0">Invoice Date : {{order.dateCreated}}</p>
+            </div>
+
+            <div class="d-flex justify-content-between mb-5">
+              <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery:</span> {{order.deliveryAddress}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block nav %}{% endblock %}
+{% block catalogue_nav %}{% endblock %}
+{% block categories_nav %}{% endblock %}
+{% block tags_nav %}{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Basket{% endblock %}
+{% block body %}
+    <h1>Items</h1>
+    <div class="container">
+        <div class="row">
+        {% for item in list_items %}
+            <div class="card col-md-4">
+                {% if item.good.image %}
+                    <img src="{{item.good.image.url}}" alt="{{item.good.name}}" class="img-thumbnail rounded mx-auto d-block">
+                {% else %}
+                {%load static%}
+                    <img src="{% static 'img/img_avatar.png' %}" alt="pic" class="img-thumbnail rounded mx-auto d-block">
+                {% endif %}
+                <div class="container">
+                    <p>Name: {{item.good.name}}</p>
+                    <p>Description: {{item.good.description}}</p>
+                    <p>Price: <b>{{item.good.price}}</b></p>
+                    <p>Amount: <b>{{item.amount}}</b></p>
+                    <div class="row">
+                        <a href="{% url "catalogue_detail" item.good.pk %}" class="btn btn-secondary col-md-4">Details</a>
+                        <a href="{% url "basket_delete" item.pk %}" class="btn btn-danger col-md-4">Delete</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    <p>Total sum: <b>{{totalSum}}</b></p>
+    <ul class="nav nav-pills">
+        <li class="nav-item"><a href="{% url "basket_clear" %}" class="nav-link">Clear</a></li>
+        <li class="nav-item"><a href="{% url "order_create" %}" class="nav-link">Make an order</a></li>
+    </ul>
+{% endblock %}
+
+{% block catalogue_nav %}{% endblock %}
+{% block categories_nav %}{% endblock %}
+{% block tags_nav %}{% endblock %}
+{% block nav %}{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Catalogue{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+        {% for item in list_items %}
+            <div class="card col-md-4">
+                {% if item.image %}
+                <img src="{{item.image.url}}" alt="{{item.name}}" class="img-thumbnail rounded mx-auto d-block">
+                {% else %}
+                {%load static%}
+                <img src="{% static 'img/img_avatar.png' %}" alt="pic" class="img-thumbnail rounded mx-auto d-block">
+                {% endif %}
+                <div class="container">
+                    <h4><b>Item {{item.id}}</b></h4>
+                    <p>Name: {{item.name}}</p>
+                    <p>Description: {{item.description}}</p>
+                    <p>Price: <b>{{item.price}}</b></p>
+                    <div class="row">
+                        <a href="/catalogue/{{item.id}}" class="btn btn-secondary col-md-4">Details</a>
+                        <a href="/catalogue/edit/{{item.id}}" class="btn btn-primary col-md-4">Edit</a>
+                        <a href="/catalogue/delete/{{item.id}}" class="btn btn-danger col-md-4">Delete</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+{% block nav %}{% endblock %}
+{% block categories_nav %}{% endblock %}
+{% block tags_nav %}{% endblock %}

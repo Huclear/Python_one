@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Tags{% endblock %}
+{% block body %}
+    <hr class="rounded">
+    <hr class="rounded">
+    <h1>Items</h1>
+    <div class="container">
+        <div class="row">
+        {% for item in tags %}
+            <div class="card col-md-4">
+                    <h4><b>Tag {{item.id}}</b></h4>
+                    <p>Name: {{item.name}}</p>
+                    <p>Description: {{item.description}}</p>
+                    <div class="row">
+                        <a href="{% url "tag_edit" item.pk %}" class="btn btn-primary col-md-4">Edit</a>
+                        <a href="{% url "tag_delete" item.pk %}" class="btn btn-danger col-md-4">Delete</a>
+                    </div>
+                </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block nav %}{% endblock %}
+{% block catalogue_nav %}{% endblock %}
+{% block categories_nav %}{% endblock %}
